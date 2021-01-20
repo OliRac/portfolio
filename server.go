@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"io/ioutil"
 	"path/filepath"
 )
 
@@ -12,10 +11,8 @@ import (
 //home is unforunately a global. Will try to come up with a way to not use globals.
 func homeHandler(res http.ResponseWriter, req *http.Request){
 	if req.URL.Path != "/" {
-
 		res.WriteHeader(http.StatusNotFound)
 		fmt.Fprintf(res, "404 not found")		//custom 404 could go here
-
 		return
 	}
 

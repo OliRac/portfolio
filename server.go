@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"path/filepath"
 	"html/template"
+	"io/ioutil"
+	"encoding/json"
 )
 
 
@@ -13,8 +15,10 @@ import (
 var (
 	StaticDir = filepath.FromSlash("./static/")
 	TemplateDir = filepath.FromSlash("./templates/")
+	DataDir = filepath.FromSlash("./data/")
 	Port = "8080"
 )
+
 
 //A dummy sample. Will simply serve the same page as static/index.html but split off in template sections
 //Doing this to learn go html/templates
@@ -30,15 +34,34 @@ func serveSample(res http.ResponseWriter, req *http.Request) {
 	}
 }
 
+
 func main() {
 	fmt.Println("Starting up server...")
+
+	fmt.Println("Reading JSON data...")
+
+	dataFile, err := ioutil.ReadFile(DataDir + "education.json")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	var test []Education
+
+	err = json.Unmarshal(dataFile, &test)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(test)
 
 	server := http.FileServer(http.Dir(StaticDir))
 	http.Handle("/static/", http.StripPrefix("/static/", server))
 	http.HandleFunc("/", serveSample)
 
 	fmt.Println("Listening on", Port)
-	err := http.ListenAndServe(":" + Port, nil)
+	err = http.ListenAndServe(":" + Port, nil)
 
 	if err != nil{
 		panic(err)

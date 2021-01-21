@@ -1,0 +1,32 @@
+[
+    {
+        "name":"Python"
+    },
+    {
+        "name":"C++"
+    },
+    {
+        "name":"OpenGL"
+    },
+    {
+        "name":"GLSL"
+    },
+    {
+        "name":"Java"
+    },
+    {
+        "name":"SQL"
+    },
+    {
+        "name":"HTML/CSS"
+    },
+    {
+        "name":"Javascript"
+    },
+    {
+        "name":"Unity"
+    },
+    {
+        "name":"Godot"
+    }
+]

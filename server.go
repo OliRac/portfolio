@@ -6,34 +6,21 @@ import (
 	"path/filepath"
 )
 
-//Also handles 404 if anything is after /
-//Servefile does some sanitizing already
-//home is unforunately a global. Will try to come up with a way to not use globals.
-func homeHandler(res http.ResponseWriter, req *http.Request){
-	if req.URL.Path != "/" {
-		res.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(res, "404 not found")		//custom 404 could go here
-		return
-	}
 
-	http.ServeFile(res, req, home)
-}
+//Files & directories to serve, port to use
+//Assuming globals use PascalCase in Go to differentiate from locals
+var (
+	StaticDir = filepath.FromSlash("./static")
+	Port = "8080"
+)
 
-func glslHandler(res http.ResponseWriter, req *http.Request){
-	fmt.Fprintf(res, "to do")
-}
-
-
-//Files to serve
-var home = filepath.FromSlash("./static/sample.html")
-//var glsl = filepath.FromSlash("./static/glsl.html")
 
 func main() {
 	fmt.Println("Starting up server...")
 
-	//init and launch
-	http.HandleFunc("/", homeHandler)
-	http.HandleFunc("/glsl", glslHandler)
+	server := http.FileServer(http.Dir(StaticDir))
+	http.Handle("/", server)	//http.StripPrefix("/static/", server))
 
-	http.ListenAndServe(":8080", nil)
+	fmt.Println("Listening on", Port)
+	http.ListenAndServe(":" + Port, nil)
 }

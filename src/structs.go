@@ -1,5 +1,12 @@
 package main
 
+type SiteData struct{
+	Edus []Education
+	Exps []Experience
+	Knows []Knowledge
+	Skills []Skill
+}
+
 type Education struct{
 	Degree string
 	Institution string

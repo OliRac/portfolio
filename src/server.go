@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"path/filepath"
 	"html/template"
-	"io/ioutil"
-	"encoding/json"
 	"os"
 )
 
@@ -17,6 +15,7 @@ var (
 	StaticDir = filepath.FromSlash("../static/")
 	TemplateDir = filepath.FromSlash("../templates/")
 	DataDir = filepath.FromSlash("../data/")
+	JSONFiles = []string{"education.json", "experience.json", "knowledge.json", "skills.json"}
 	Port = "8080"
 )
 
@@ -35,30 +34,6 @@ func serveSample(res http.ResponseWriter, req *http.Request) {
 	}
 }
 
-//Reads the JSON file at the given path and returns a pre-set array of maps string:string
-//Errors are not handled here, just raised and returned
-func readJSONtoMap(path string) ([] map[string]string, error){
-	fmt.Println("Attempting to read", path)
-
-	rawData, err := ioutil.ReadFile(path)
-
-	if err != nil {
-		return nil, err
-	}
-
-	var result [] map[string] string
-
-	err = json.Unmarshal(rawData, &result)
-
-	if err != nil {
-		return nil, err
-	}
-
-	fmt.Println("Import successful")
-
-	return result, nil
-}
-
 func checkError(e error) {
 	if e != nil{
 		fmt.Println(e)
@@ -71,7 +46,20 @@ func main() {
 	
 	fmt.Println("Importing data...")
 
-	edus, err := readJSONtoMap(DataDir + "education.json")
+	data := importDataTwo(DataDir, JSONFiles)
+
+	fmt.Println(data)
+
+	//data, _ := importData(DataDir)
+
+	//fmt.Println(data)
+
+	//edus, err := importEducation(DataDir + "education.json")
+	//checkError(err)
+
+	//fmt.Println(edus)
+
+	/*edus, err := readJSONtoMap(DataDir + "education.json")
 	checkError(err)
 
 	exps, err := readJSONtoMap(DataDir + "experience.json")
@@ -83,9 +71,9 @@ func main() {
 	skills, err := readJSONtoMap(DataDir + "skills.json")
 	checkError(err)
 
-	fmt.Println(edus, exps, knows, skills)
+	fmt.Println(edus, exps, knows, skills)*/
 
-	server := http.FileServer(http.Dir(StaticDir))
+	/*server := http.FileServer(http.Dir(StaticDir))
 	http.Handle("/static/", http.StripPrefix("/static/", server))
 	http.HandleFunc("/", serveSample)
 
@@ -94,5 +82,5 @@ func main() {
 
 	if err != nil{
 		panic(err)
-	}
+	}*/
 }

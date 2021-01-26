@@ -1,5 +1,6 @@
 package main
 
+//Struct that wraps all others, contains lists/arrays of every type, to use with html templates
 type SiteData struct{
 	Edus []Education
 	Exps []Experience

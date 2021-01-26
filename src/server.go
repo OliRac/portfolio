@@ -17,50 +17,51 @@ var (
 	DataDir = filepath.FromSlash("../data/")
 	JSONFiles = []string{"education.json", "experience.json", "knowledge.json", "skills.json"}
 	Port = "8080"
-	data = SiteData{}
 )
 
 
-//A dummy sample. Will simply serve the same page as static/index.html but split off in template sections
+//Will simply serve the same page as static/index.html but split off in template sections
 //Doing this to learn go html/templates
 //Going step by step! slowly but surely.
-func serveSample(res http.ResponseWriter, req *http.Request) {
-	data, _ = importData(DataDir)
+func serveIndex(res http.ResponseWriter, req *http.Request) {
 
-	tmpl, _ := template.ParseGlob(TemplateDir + "*.html")
+	//Should site data be fetched with every request? or be cached? I'm not entirely sure how to proceed.
+	//Leaving it this way is great for debugging, don't need to re-launch the server every time
+	//Might cache it on a later release 
+	data := importData(DataDir)
 
-	err := tmpl.ExecuteTemplate(res, "resume", data)
+	tmpl, err := template.ParseGlob(TemplateDir + "*.html")
 
-	if err != nil{
-		fmt.Println("Error executing template :(")
-		fmt.Println(err)
-	}
+	checkError(err, true)
+
+	err = tmpl.ExecuteTemplate(res, "resume", data)
+
+	//firewall causes an error here sometimes, but it does not cause a crash, so its more like a warning lol...
+	checkError(err, false)
 }
 
-func checkError(e error) {
+
+//Small wrapper to help with error checking
+func checkError(e error, stop bool) {
 	if e != nil{
 		fmt.Println(e)
-		os.Exit(1)
+
+		if stop {
+			os.Exit(1)
+		}		
 	}
 }
+
 
 func main() {
 	fmt.Println("Starting up server...")
-	
-	fmt.Println("Importing data...")
-
-	//data := importDataTwo(DataDir, JSONFiles)
-
-	//fmt.Println(data)
 
 	server := http.FileServer(http.Dir(StaticDir))
 	http.Handle("/static/", http.StripPrefix("/static/", server))
-	http.HandleFunc("/", serveSample)
+	http.HandleFunc("/", serveIndex)
 
 	fmt.Println("Listening on", Port)
 	err := http.ListenAndServe(":" + Port, nil)
 
-	if err != nil{
-		panic(err)
-	}
+	checkError(err, true)
 }

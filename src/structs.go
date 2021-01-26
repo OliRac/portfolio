@@ -19,7 +19,7 @@ type Experience struct {
 	Description string
 	Company string
 	Start string
-	End string
+	Stop string
 }
 
 type Knowledge struct {

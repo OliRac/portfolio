@@ -1,4 +1,5 @@
 {{define "skills"}}
+{{$skills := .}}
 <section class="section bottom-spacer" id="skills">
     <div class="container bottom-spacer">
         <h1 class="title">Skills</h1>
@@ -6,61 +7,13 @@
 
     
     <div class="columns is-multiline is-centered">
+        {{range $skills}}
         <div class="column is-narrow">
             <p class="box subtitle hover-grow">
-                Python
+                {{.Name}}
             </p>
         </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                C++
-            </p>
-        </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                C#
-            </p>
-        </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                OpenGL
-            </p>
-        </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                GLSL
-            </p>
-        </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                Java
-            </p>
-        </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                SQL
-            </p>
-        </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                HTML/CSS
-            </p>
-        </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                Javascript
-            </p>
-        </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                Unity
-            </p>
-        </div>
-        <div class="column is-narrow">
-            <p class="box subtitle hover-grow">
-                Godot
-            </p>
-        </div>
+        {{end}}
     </div>
 </section>
 {{end}}

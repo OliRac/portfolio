@@ -8,7 +8,7 @@ import (
 )
 
 //Smells pretty bad in here
-func importData(dir string) (*SiteData, error){
+func importData(dir string) (SiteData, error){
 	fmt.Println("Attempting to import data from", dir)
 
 	var data SiteData
@@ -40,7 +40,7 @@ func importData(dir string) (*SiteData, error){
 	err = json.Unmarshal(skillData, &data.Skills)
 	checkError(err)
 
-	return &data, err
+	return data, err
 }
 
 func importDataTwo(dir string, files [] string) *SiteData {

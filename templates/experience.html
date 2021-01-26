@@ -1,95 +1,31 @@
 {{define "experience"}}
+{{$exps := .}}
 <section class="section" id="experience">
     <div class="container bottom-spacer">
         <h1 class="title">Experience</h1>
     </div>
     <div class="container">
         <div class="columns is-multiline">
+            {{range $exps}}
             <div class="column is-half">
                 <div class="card">
                     <header class="card-header">
                         <p class="card-header-title">
-                            Data Entry
+                            {{.Title}}
                         </p>
                     </header>
 
                     <div class="card-content">
-                        Online part time work for a confidential project. 
-                        <br>
-                        Great opportunity to work with a full time college schedule.
+                        {{.Description}}
                     </div>
 
                     <footer class="card-footer">
-                        <p class="card-footer-item"><i class="fas fa-location-arrow has-text-info"></i>Appen</p>
-                        <p class="card-footer-item"><i class="fas fa-calendar-alt has-text-info"></i>May 2019 - December 2020</p>
+                        <p class="card-footer-item"><i class="fas fa-location-arrow has-text-info"></i>{{.Company}}</p>
+                        <p class="card-footer-item"><i class="fas fa-calendar-alt has-text-info"></i>{{.Start}} - {{.Stop}}</p>
                     </footer>
                 </div>
             </div>
-
-            <div class="column is-half">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            IT Technician
-                        </p>
-                    </header>
-
-                    <div class="card-content">
-                        Built a project tracking tool on the organization’s intranet using HTML/CSS, JS, PHP and MariaDB. The tool allows anadministrator to add projects and data such as budgets, start dates and deadlines, and visualizes the data in multipletypes of graphs to aid in decision making.
-                        <br><br>
-                        Set up and maintained a CentOS web server.
-                    </div>
-
-                    <footer class="card-footer">
-                        <p class="card-footer-item"><i class="fas fa-location-arrow has-text-info"></i>City of Westmount</p>
-                        <p class="card-footer-item"><i class="fas fa-calendar-alt has-text-info"></i>May 2016 - August 2016</p>
-                    </footer>
-                </div>
-            </div>
-
-            <div class="column is-half">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            IT Technician
-                        </p>
-                    </header>
-
-                    <div class="card-content">
-                        Assisted in the second revamp of the organization’s web site by remodeling the front-end.
-                        <br><br>
-                        Coded multiple bash scripts to automate data fetching jobs.
-                        <br><br>
-                        Produced documentation for business processes.
-                    </div>
-
-                    <footer class="card-footer">
-                        <p class="card-footer-item"><i class="fas fa-location-arrow has-text-info"></i>City of Westmount</p>
-                        <p class="card-footer-item"><i class="fas fa-calendar-alt has-text-info"></i>May 2015 - November 2015</p>
-                    </footer>
-                </div>
-            </div>
-
-            <div class="column is-half">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            IT Technician
-                        </p>
-                    </header>
-
-                    <div class="card-content">
-                        Aided in the revision of the organization’s entire web site; handled data migration and front-end development.
-                        <br><br>
-                        Rewrote obsolete documentation for the department’s software and servers.
-                    </div>
-
-                    <footer class="card-footer">
-                        <p class="card-footer-item"><i class="fas fa-location-arrow has-text-info"></i>City of Westmount</p>
-                        <p class="card-footer-item"><i class="fas fa-calendar-alt has-text-info"></i>May 2014 - December 2014</p>
-                    </footer>
-                </div>
-            </div>
+            {{end}}  
         </div>
     </div>
 </section>

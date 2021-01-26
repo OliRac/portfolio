@@ -17,6 +17,7 @@ var (
 	DataDir = filepath.FromSlash("../data/")
 	JSONFiles = []string{"education.json", "experience.json", "knowledge.json", "skills.json"}
 	Port = "8080"
+	data = SiteData{}
 )
 
 
@@ -24,9 +25,11 @@ var (
 //Doing this to learn go html/templates
 //Going step by step! slowly but surely.
 func serveSample(res http.ResponseWriter, req *http.Request) {
+	data, _ = importData(DataDir)
+
 	tmpl, _ := template.ParseGlob(TemplateDir + "*.html")
 
-	err := tmpl.ExecuteTemplate(res, "resume", nil)
+	err := tmpl.ExecuteTemplate(res, "resume", data)
 
 	if err != nil{
 		fmt.Println("Error executing template :(")
@@ -46,41 +49,18 @@ func main() {
 	
 	fmt.Println("Importing data...")
 
-	data := importDataTwo(DataDir, JSONFiles)
-
-	fmt.Println(data)
-
-	//data, _ := importData(DataDir)
+	//data := importDataTwo(DataDir, JSONFiles)
 
 	//fmt.Println(data)
 
-	//edus, err := importEducation(DataDir + "education.json")
-	//checkError(err)
-
-	//fmt.Println(edus)
-
-	/*edus, err := readJSONtoMap(DataDir + "education.json")
-	checkError(err)
-
-	exps, err := readJSONtoMap(DataDir + "experience.json")
-	checkError(err)
-
-	knows, err := readJSONtoMap(DataDir + "knowledge.json")
-	checkError(err)
-
-	skills, err := readJSONtoMap(DataDir + "skills.json")
-	checkError(err)
-
-	fmt.Println(edus, exps, knows, skills)*/
-
-	/*server := http.FileServer(http.Dir(StaticDir))
+	server := http.FileServer(http.Dir(StaticDir))
 	http.Handle("/static/", http.StripPrefix("/static/", server))
 	http.HandleFunc("/", serveSample)
 
 	fmt.Println("Listening on", Port)
-	err = http.ListenAndServe(":" + Port, nil)
+	err := http.ListenAndServe(":" + Port, nil)
 
 	if err != nil{
 		panic(err)
-	}*/
+	}
 }

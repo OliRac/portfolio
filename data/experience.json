@@ -4,27 +4,27 @@
         "description": "Online part time work for a confidential project. Great opportunity to work with a full time college schedule.",
         "company": "Appen",
         "start": "May 2019",
-        "end": "December 2020"
+        "stop": "December 2020"
     },
     {
         "title":"IT Technician",
         "description": "Built a project tracking tool on the organization’s intranet using HTML/CSS, JS, PHP and MariaDB. The tool allows anadministrator to add projects and data such as budgets, start dates and deadlines, and visualizes the data in multipletypes of graphs to aid in decision making. Set up and maintained a CentOS web server.",
         "company": "City of Westmount",
         "start": "May 2016",
-        "end": "August 2016"
+        "stop": "August 2016"
     },
     {
         "title":"IT Technician",
         "description": "Assisted in the second revamp of the organization’s web site by remodeling the front-end. Coded multiple bash scripts to automate data fetching jobs. Produced documentation for business processes.",
         "company": "City of Westmount",
         "start": "May 2015",
-        "end": "November 2015"
+        "stop": "November 2015"
     },
     {
         "title":"IT Technician",
         "description": "Aided in the revision of the organization’s entire web site; handled data migration and front-end development. Rewrote obsolete documentation for the department’s software and servers.",
         "company": "City of Westmount",
         "start": "May 2014",
-        "end": "August 2014"
+        "stop": "August 2014"
     }
 ]

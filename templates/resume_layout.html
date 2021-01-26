@@ -1,4 +1,5 @@
 {{define "resume"}}
+{{$data := .}}
 <!doctype html>
 
 <html lang="en">
@@ -24,13 +25,13 @@
 
         {{template "about"}}
 
-        {{template "skills"}}
+        {{template "skills" $data.Skills}}
 
-        {{template "knowledge"}}
+        {{template "knowledge" $data.Knows}}
 
-        {{template "education"}}
+        {{template "education" $data.Edus}}
 
-        {{template "experience"}}
+        {{template "experience" $data.Exps}}
 
         {{template "footer"}}
         <script src="static/js/script.js"></script>

@@ -1,0 +1,45 @@
+tables:
+    t_language
+        id          serial  pk
+        name        varchar(30)
+        code        varchar(5)
+
+    t_education
+        id          serial  pk
+        degree      varchar(100)
+        institution varchar(100)
+        location    varchar(100)
+        grad_year   date
+        language    integer fk
+
+    t_experience
+        id          serial  pk
+        title       varchar(100)
+        description text
+        company     varchar(100)
+        duration    daterange
+        language    integer     fk
+
+    t_knowledge
+        id          serial  pk
+        name        varchar(100)
+        language    integer     fk
+
+    t_skill
+        id          serial  pk
+        name        varchar(100)
+        language    integer     fk
+
+    t_headers
+        id          serial  pk
+        section     varchar(100)
+        language    integer     fk
+
+
+views:
+    v_education_en
+        t_education join t_language where t_language.name = 'english'
+
+    v_experience_en
+        t_experience join t_language where t_language.name = 'english'
+    ...

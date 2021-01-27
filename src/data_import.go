@@ -19,11 +19,13 @@ func importData(dir string) *SiteData {
 	err = json.Unmarshal(eduData, &data.Edus)
 	checkError(err, true)
 
+
 	expData, err := ioutil.ReadFile(filepath.Join(dir, "experience.json"))
 	checkError(err, true)
 
 	err = json.Unmarshal(expData, &data.Exps)
 	checkError(err, true)
+
 
 	knowData, err := ioutil.ReadFile(filepath.Join(dir, "knowledge.json"))
 	checkError(err, true)
@@ -31,11 +33,26 @@ func importData(dir string) *SiteData {
 	err = json.Unmarshal(knowData, &data.Knows)
 	checkError(err, true)
 
+
 	skillData, err := ioutil.ReadFile(filepath.Join(dir, "skills.json"))
 	checkError(err, true)
 
 	err = json.Unmarshal(skillData, &data.Skills)
 	checkError(err, true)
+
+
+	aboutData, err := ioutil.ReadFile(filepath.Join(dir, "about.json"))
+	checkError(err, true)
+
+	err = json.Unmarshal(aboutData, &data.Info)
+	checkError(err, true) 
+
+
+	heroData, err := ioutil.ReadFile(filepath.Join(dir, "hero.json"))
+	checkError(err, true)
+
+	err = json.Unmarshal(heroData, &data.Person)
+	checkError(err, true) 
 
 	return &data
 }

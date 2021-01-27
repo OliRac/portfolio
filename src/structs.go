@@ -6,6 +6,18 @@ type SiteData struct{
 	Exps []Experience
 	Knows []Knowledge
 	Skills []Skill
+	Person Hero
+	Info About
+}
+
+type Hero struct {
+	Name string
+	Title string
+}
+
+type About struct {
+	Quote string
+	Description string
 }
 
 type Education struct{

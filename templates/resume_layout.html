@@ -21,9 +21,9 @@
     <body>
         {{template "navbar"}}
 
-        {{template "hero"}}
+        {{template "hero" $data.Person}}
 
-        {{template "about"}}
+        {{template "about" $data.Info}}
 
         {{template "skills" $data.Skills}}
 

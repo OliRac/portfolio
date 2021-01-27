@@ -30,11 +30,9 @@ func serveIndex(res http.ResponseWriter, req *http.Request) {
 	//Might cache it on a later release 
 	data := importData(DataDir)
 
-	tmpl, err := template.ParseGlob(TemplateDir + "*.html")
+	tmpl := template.Must(template.ParseGlob(TemplateDir + "*.html"))
 
-	checkError(err, true)
-
-	err = tmpl.ExecuteTemplate(res, "resume", data)
+	err := tmpl.ExecuteTemplate(res, "resume", data)
 
 	//firewall causes an error here sometimes, but it does not cause a crash, so its more like a warning lol...
 	checkError(err, false)

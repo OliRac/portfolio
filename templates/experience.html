@@ -2,11 +2,11 @@
 {{$exps := .}}
 <section class="section" id="experience">
     <div class="container bottom-spacer">
-        <h1 class="title">Experience</h1>
+        <h1 class="title">{{.Header}}</h1>
     </div>
     <div class="container">
         <div class="columns is-multiline">
-            {{range $exps}}
+            {{range $exps.Entries}}
             <div class="column is-half">
                 <div class="card">
                     <header class="card-header">

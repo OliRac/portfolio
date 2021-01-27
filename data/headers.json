@@ -3,5 +3,6 @@
     "skills":"Skills",
     "knowledge":"Knowledge",
     "education":"Education",
-    "experience":"Experience"
+    "experience":"Experience",
+    "links": "Links"
 }

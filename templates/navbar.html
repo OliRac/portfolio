@@ -1,4 +1,5 @@
 {{define "navbar"}}
+{{$data := .}}
 <nav class="navbar is-link is-fixed-top is-spaced is-info">
     <div class="navbar-brand">
         <div class="navbar-burger burger" data-target="menu">
@@ -12,22 +13,22 @@
     <div class="navbar-menu" id="menu">
         <div class="navbar-end">
             <a class="navbar-item is-info" href="#about">
-                <span>About</span>
+                <span>{{.About}}</span>
             </a>
             <a class="navbar-item is-info" href="#skills">
-                <span>Skills</span>
+                <span>{{.Skills}}</span>
             </a>
             <a class="navbar-item is-info" href="#knowledge">
-                <span>Knowledge</span>
+                <span>{{.Knowledge}}</span>
             </a>
             <a class="navbar-item is-info" href="#education">
-                <span>Education</span>
+                <span>{{.Education}}</span>
             </a>
             <a class="navbar-item is-info" href="#experience">
-                <span>Experience</span>
+                <span>{{.Experience}}</span>
             </a>
             <a class="navbar-item is-info" href="#links">
-                <span>Links</span>
+                <span>{{.Links}}</span>
             </a>
         </div>
     </div>

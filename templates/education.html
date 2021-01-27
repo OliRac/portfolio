@@ -2,12 +2,12 @@
 {{$edus := .}}
 <section class="section" id="education">
     <div class="container">
-        <h1 class="title">Education</h1>
+        <h1 class="title">{{.Header}}</h1>
     </div>
 </section>
 
 
-{{range $edus}}
+{{range $edus.Entries}}
   <section class="hero has-background-link-light has-text-centered" id="edu-hero-1">
     <div class="hero-body">
       <div class="container">

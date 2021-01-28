@@ -28,12 +28,16 @@ tables:
     t_skill
         id          serial  pk
         name        varchar(100)
-        language    integer     fk
 
     t_headers
         id          serial  pk
         section     varchar(100)
         language    integer     fk
+        page_id       integer     fk
+
+    t_page
+        id
+        name
 
 
 views:

@@ -1,5 +1,7 @@
 package main
 
+/*Most of these will have to be renamed to better reflect interactivity with the database*/
+
 //Struct that wraps all others, contains lists/arrays of every type, to use with html templates
 type SiteData struct{
 	Edus EduSection

@@ -52,7 +52,7 @@ func checkError(e error, stop bool) {
 
 
 func main() {
-	fmt.Println("Starting up server...")
+	/*fmt.Println("Starting up server...")
 
 	server := http.FileServer(http.Dir(StaticDir))
 	http.Handle("/static/", http.StripPrefix("/static/", server))
@@ -61,5 +61,26 @@ func main() {
 	fmt.Println("Listening on", Port)
 	err := http.ListenAndServe(":" + Port, nil)
 
-	checkError(err, true)
+	checkError(err, true)*/
+
+	/*query example*/
+	var db Database
+
+	db.Connect()
+
+	rows := db.GetView("v_edu_en")
+
+	var edu Education
+	var collect []Education
+
+	for rows.Next() {
+		rows.Scan(&edu.Degree, &edu.Institution, &edu.Location, &edu.Date)
+
+		fmt.Println(edu)
+		collect = append(collect, edu)
+	}
+
+	fmt.Println(collect)
+
+	db.Disconnect()
 }

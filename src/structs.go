@@ -69,6 +69,7 @@ type Experience struct {
 	Company string
 	Start string
 	Stop string
+	Duration string
 }
 
 /*wow so much difference here!*/

@@ -41,11 +41,12 @@ func serveIndex(res http.ResponseWriter, req *http.Request) {
 //Stops the current process if there is an error
 func CheckErrorFatal(e error){
 	if e != nil {
+		fmt.Println(e)
 		os.Exit(1)
 	}
 }
 
-//Will not stop the process on error, but will show the error on console
+//Will not stop the process on error, but will still show the error on console
 func CheckErrorNonFatal(e error){
 	if e != nil {
 		fmt.Println(e)
@@ -70,17 +71,15 @@ func main() {
 
 	db.Connect()
 
-	rows := db.GetView("v_edu_en")
+	lang := "en"
 
-	var edu Education
-	var collect []Education
+	edu := db.GetEducation(lang)
+	kno := db.GetKnowledge(lang)
+	exp := db.GetExperience(lang)
 
-	for rows.Next() {
-		rows.Scan(&edu.Degree, &edu.Institution, &edu.Location, &edu.Date)
-		collect = append(collect, edu)
-	}
-
-	fmt.Println(collect)
+	fmt.Println(edu)
+	fmt.Println(kno)
+	fmt.Println(exp)
 
 	db.Disconnect()
 }

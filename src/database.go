@@ -50,3 +50,48 @@ func (db *Database) GetView(view string) *sql.Rows {
 
 	return rows
 }
+
+//Retrieves all education of the given language
+func (db *Database) GetEducation(lang string) *[] Education{
+	rows := db.GetView("v_edu_" + lang)
+
+	var edu Education
+	var collect []Education
+
+	for rows.Next() {
+		rows.Scan(&edu.Degree, &edu.Institution, &edu.Location, &edu.Date)
+		collect = append(collect, edu)
+	}
+
+	return &collect
+} 
+
+//Retrieves all knowledge of the given language
+func (db *Database) GetKnowledge(lang string) *[] Knowledge{
+	rows := db.GetView("v_know_" + lang)
+
+	var know Knowledge
+	var collect []Knowledge
+
+	for rows.Next() {
+		rows.Scan(&know.Name)
+		collect = append(collect, know)
+	}
+
+	return &collect
+} 
+
+//Retrieves all experiences of the given language
+func (db *Database) GetExperience(lang string) *[] Experience{
+	rows := db.GetView("v_exp_" + lang)
+
+	var exp Experience
+	var collect []Experience
+
+	for rows.Next() {
+		rows.Scan(&exp.Title, &exp.Description, &exp.Company, &exp.Duration)
+		collect = append(collect, exp)
+	}
+
+	return &collect
+} 

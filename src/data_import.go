@@ -15,53 +15,53 @@ func importData(dir string) *SiteData {
 	var data SiteData
 
 	eduData, err := ioutil.ReadFile(filepath.Join(dir, "education.json"))
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 	err = json.Unmarshal(eduData, &data.Edus.Entries)
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 
 	expData, err := ioutil.ReadFile(filepath.Join(dir, "experience.json"))
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 	err = json.Unmarshal(expData, &data.Exps.Entries)
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 
 	knowData, err := ioutil.ReadFile(filepath.Join(dir, "knowledge.json"))
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 	err = json.Unmarshal(knowData, &data.Knows.Entries)
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 
 	skillData, err := ioutil.ReadFile(filepath.Join(dir, "skills.json"))
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 	err = json.Unmarshal(skillData, &data.Skills.Entries)
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 
 	aboutData, err := ioutil.ReadFile(filepath.Join(dir, "about.json"))
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 	err = json.Unmarshal(aboutData, &data.Info)
-	checkError(err, true) 
+	CheckErrorFatal(err) 
 
 
 	heroData, err := ioutil.ReadFile(filepath.Join(dir, "hero.json"))
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 	err = json.Unmarshal(heroData, &data.Person)
-	checkError(err, true) 
+	CheckErrorFatal(err) 
 
 
 	//Setting headers
 	headerData, err := ioutil.ReadFile(filepath.Join(dir, "headers.json"))
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 	err = json.Unmarshal(headerData, &data.NavbarItems)
-	checkError(err, true) 
+	CheckErrorFatal(err) 
 
 	//for the moment, the navbar is comprised of the page's headers. Might change later.
 	data.Edus.Header = data.NavbarItems.Education

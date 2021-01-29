@@ -35,18 +35,20 @@ func serveIndex(res http.ResponseWriter, req *http.Request) {
 	err := tmpl.ExecuteTemplate(res, "resume", data)
 
 	//firewall causes an error here sometimes, but it does not cause a crash, so its more like a warning lol...
-	checkError(err, false)
+	CheckErrorNonFatal(err)
 }
 
+//Stops the current process if there is an error
+func CheckErrorFatal(e error){
+	if e != nil {
+		os.Exit(1)
+	}
+}
 
-//Small wrapper to help with error checking
-func checkError(e error, stop bool) {
-	if e != nil{
+//Will not stop the process on error, but will show the error on console
+func CheckErrorNonFatal(e error){
+	if e != nil {
 		fmt.Println(e)
-
-		if stop {
-			os.Exit(1)
-		}		
 	}
 }
 
@@ -61,7 +63,7 @@ func main() {
 	fmt.Println("Listening on", Port)
 	err := http.ListenAndServe(":" + Port, nil)
 
-	checkError(err, true)*/
+	CheckErrorFatal(err)
 
 	/*query example*/
 	var db Database
@@ -75,8 +77,6 @@ func main() {
 
 	for rows.Next() {
 		rows.Scan(&edu.Degree, &edu.Institution, &edu.Location, &edu.Date)
-
-		fmt.Println(edu)
 		collect = append(collect, edu)
 	}
 

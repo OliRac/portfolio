@@ -18,29 +18,35 @@ type Database struct {
 	conn *sql.DB
 }
 
+//Connects to the pre-defined server, see constants above
+//Exits on eror
 func (db *Database) Connect() {
 	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 	c, err := sql.Open("postgres", connStr)
-	checkError(err, true)
+	CheckErrorFatal(err)
 
 	db.conn = c
 }
 
+//Exits on error
 func (db *Database) Disconnect() {
-	checkError(db.conn.Close(), true)
+	CheckErrorFatal(db.conn.Close())
 }
 
+//Use this to make sure the connection is still up
+//Exits on error
 func (db *Database) CheckConn() {
-	checkError(db.conn.Ping(), true)
+	CheckErrorFatal(db.conn.Ping())
 }
 
+//Get an existing view (or table) from the database
 func (db *Database) GetView(view string) *sql.Rows {
 	db.CheckConn()
 
 	q := fmt.Sprintf("SELECT * FROM %s", view)
 
 	rows, err := db.conn.Query(q)
-	checkError(err, true)			//split up checkError in two: fatal and non fatal
+	CheckErrorFatal(err)
 
 	return rows
 }

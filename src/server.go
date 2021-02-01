@@ -14,8 +14,6 @@ import (
 var (
 	StaticDir = filepath.FromSlash("../static/")
 	TemplateDir = filepath.FromSlash("../templates/")
-	DataDir = filepath.FromSlash("../data/")
-	JSONFiles = []string{"education.json", "experience.json", "knowledge.json", "skills.json"}
 	Port = "8080"
 )
 
@@ -23,18 +21,15 @@ var (
 //Will simply serve the same page as static/index.html but split off in template sections
 //Doing this to learn go html/templates
 //Going step by step! slowly but surely.
-func serveIndex(res http.ResponseWriter, req *http.Request) {
+func ServeResume(res http.ResponseWriter, req *http.Request){
+	lang := "en"	//fetching the lang in request later
 
-	//Should site data be fetched with every request? or be cached? I'm not entirely sure how to proceed.
-	//Leaving it this way is great for debugging, don't need to re-launch the server every time
-	//Might cache it on a later release 
-	data := importData(DataDir)
+	data := BuildResume(lang)
 
-	tmpl := template.Must(template.ParseGlob(TemplateDir + "*.html"))
+	tmpl := template.Must(template.ParseGlob(TemplateDir + "resume/" + "*.html"))
 
 	err := tmpl.ExecuteTemplate(res, "resume", data)
 
-	//firewall causes an error here sometimes, but it does not cause a crash, so its more like a warning lol...
 	CheckErrorNonFatal(err)
 }
 
@@ -55,31 +50,14 @@ func CheckErrorNonFatal(e error){
 
 
 func main() {
-	/*fmt.Println("Starting up server...")
+	fmt.Println("Starting up server...")
 
 	server := http.FileServer(http.Dir(StaticDir))
 	http.Handle("/static/", http.StripPrefix("/static/", server))
-	http.HandleFunc("/", serveIndex)
+	http.HandleFunc("/", ServeResume)
 
 	fmt.Println("Listening on", Port)
 	err := http.ListenAndServe(":" + Port, nil)
 
 	CheckErrorFatal(err)
-
-	/*query example*/
-	var db Database
-
-	db.Connect()
-
-	lang := "en"
-
-	edu := db.GetEducation(lang)
-	kno := db.GetKnowledge(lang)
-	exp := db.GetExperience(lang)
-
-	fmt.Println(edu)
-	fmt.Println(kno)
-	fmt.Println(exp)
-
-	db.Disconnect()
 }

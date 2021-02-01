@@ -3,35 +3,35 @@ package main
 /*Most of these will have to be renamed to better reflect interactivity with the database*/
 
 //Struct that wraps all others, contains lists/arrays of every type, to use with html templates
-type SiteData struct{
-	Edus EduSection
-	Exps ExpSection
-	Knows KnowSection
-	Skills SkillSection
-	Person Hero
-	Info About
-	NavbarItems Headers			//for the moment, the navbar is comprised of the page's headers. Might change later.
+type ResumeData struct{
+	Edus *EduSection
+	Exps *ExpSection
+	Knows *KnowSection
+	Skills *SkillSection
+	Person *Hero
+	Info *About
+	NavbarItems *Headers			//for the moment, the navbar is comprised of the page's headers. Might change later.
 }
 
 /*Each section will have entries and a header*/
 type EduSection struct {
 	Header string
-	Entries []Education
+	Entries *[]Education
 }
 
 type ExpSection struct {
 	Header string
-	Entries []Experience
+	Entries *[]Experience
 }
 
 type KnowSection struct {
 	Header string
-	Entries []Knowledge
+	Entries *[]Knowledge
 }
 
 type SkillSection struct {
 	Header string
-	Entries []Skill
+	Entries *[]Skill
 }
 
 /*These sections do not have lists of entries*/
@@ -69,7 +69,6 @@ type Experience struct {
 	Company string
 	Start string
 	Stop string
-	Duration string
 }
 
 /*wow so much difference here!*/

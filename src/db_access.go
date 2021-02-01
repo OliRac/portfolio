@@ -87,11 +87,77 @@ func (db *Database) GetExperience(lang string) *[] Experience{
 
 	var exp Experience
 	var collect []Experience
+	var locale string		//for now, locale is a part of the view. this will probably change it its bugging for french anyway...
 
 	for rows.Next() {
-		rows.Scan(&exp.Title, &exp.Description, &exp.Company, &exp.Duration)
+		rows.Scan(&locale, &exp.Title, &exp.Description, &exp.Company, &exp.Start, &exp.Stop)
 		collect = append(collect, exp)
 	}
 
 	return &collect
 } 
+
+//Retrieves about section information with the given language
+func (db *Database) GetAbout(lang string) *About {
+	rows := db.GetView("v_about_" + lang)
+
+	var ab About
+
+	for rows.Next() {
+		rows.Scan(&ab.Quote, &ab.Description)
+	}
+
+	return &ab
+} 
+
+//Retrieves hero section information with the given language
+func (db *Database) GetHero(lang string) *Hero {
+	rows := db.GetView("v_hero_" + lang)
+	
+	var hero Hero
+
+	for rows.Next() {
+		rows.Scan(&hero.Name, &hero.Title)
+	}
+
+	return &hero
+} 
+
+//Retrieves the skill view. These are language independant.
+func (db *Database) GetSkill() *[]Skill {
+	rows := db.GetView("v_skill")
+
+	var skill Skill
+	var collect []Skill
+
+	for rows.Next() {
+		rows.Scan(&skill.Name)
+		collect = append(collect, skill)
+	}
+
+	return &collect
+}
+
+//Retrieves all section headers of the given language
+func (db *Database) GetSectionHeaders(lang string) *Headers{
+	rows := db.GetView("v_section_" + lang)
+
+	var str string
+	var collect []string
+	var head Headers
+
+	for rows.Next() {
+		rows.Scan(&str)
+		collect = append(collect, str)
+	}
+
+	//Don't do as I do LOL ¯\_(ツ)_/¯
+	head.About = collect[0]
+	head.Skills = collect[1]
+	head.Knowledge = collect[2]
+	head.Education = collect[3]
+	head.Experience = collect[4]
+	head.Links = collect[5]
+
+	return &head
+}

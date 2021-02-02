@@ -35,6 +35,13 @@ func BuildResume(lang string) *ResumeData{
 
 	hero := db.GetHero(lang)
 	
+	langBtn := "fr"
+
+	//if user language is french, change lang button to english
+	if lang == "fr"{
+		langBtn = "en"
+	}
+
 	//Linking everything together
 	data := ResumeData{
 		Edus: &edu,
@@ -44,6 +51,7 @@ func BuildResume(lang string) *ResumeData{
 		Person: hero,
 		Info: about,
 		NavbarItems: headers,
+		LangButton: langBtn,
 	}
 
 	return &data

@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 	"html/template"
 	"os"
+	"strings"
+	"io/ioutil"
 )
 
 
@@ -17,12 +19,18 @@ var (
 	Port = "8080"
 )
 
-
 //Will simply serve the same page as static/index.html but split off in template sections
 //Doing this to learn go html/templates
 //Going step by step! slowly but surely.
 func ServeResume(res http.ResponseWriter, req *http.Request){
-	lang := "en"	//fetching the lang in request later
+	//Getting the user requested language, inserted in POST
+	body, _ := ioutil.ReadAll(req.Body)
+	bodyStr := string(body)
+	lang := "en"
+
+	if  bodyStr != ""{
+		lang = strings.Split(bodyStr, "=")[1]
+	}
 
 	data := BuildResume(lang)
 

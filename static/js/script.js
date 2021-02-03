@@ -9,3 +9,9 @@
         menu.classList.toggle('is-active');
     });
 })();
+
+//This supposedly solves the form resubmission issue with the lang button.
+//From https://dtbaker.net/files/prevent-post-resubmit.php
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}

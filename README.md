@@ -7,8 +7,8 @@ Data is being imported with JSON unmarshall for the moment, will most probably s
 Currently only available in english...
 
 ## TO DO
-- Database
-- French version
-- Switching languages
+- [x] Database
+- [] French version
+- [x] Switching languages
 - HTTPS
 - Hosting the site somewhere :)

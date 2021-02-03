@@ -8,7 +8,7 @@ Currently only available in english...
 
 ## TO DO
 - [x] Database
-- [] French version
+- [ ] French version
 - [x] Switching languages
-- HTTPS
-- Hosting the site somewhere :)
+- [ ] HTTPS
+- [ ] Hosting the site somewhere :)

@@ -16,6 +16,8 @@ import (
 var (
 	StaticDir = filepath.FromSlash("../static/")
 	TemplateDir = filepath.FromSlash("../templates/")
+	CertPath = filepath.FromSlash("C:/certs/server.crt")	//cert and key are self signed for the moment
+	KeyPath = filepath.FromSlash("C:/certs/server.key")
 	Port = "8080"
 )
 
@@ -65,7 +67,7 @@ func main() {
 	http.HandleFunc("/", ServeResume)
 
 	fmt.Println("Listening on", Port)
-	err := http.ListenAndServe(":" + Port, nil)
+	err := http.ListenAndServeTLS(":" + Port, CertPath, KeyPath, nil)
 
 	CheckErrorFatal(err)
 }

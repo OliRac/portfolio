@@ -6,8 +6,6 @@ import (
 	"path/filepath"
 	"html/template"
 	"os"
-	"strings"
-	"io/ioutil"
 )
 
 
@@ -22,24 +20,34 @@ var (
 //Will simply serve the same page as static/index.html but split off in template sections
 //Doing this to learn go html/templates
 //Going step by step! slowly but surely.
-func ServeResume(res http.ResponseWriter, req *http.Request){
-	//Getting the user requested language, inserted in POST
-	body, _ := ioutil.ReadAll(req.Body)
-	bodyStr := string(body)
-	lang := "en"
-
-	if  bodyStr != ""{
-		lang = strings.Split(bodyStr, "=")[1]
-	}
-
-	data := BuildResume(lang)
+func ServeResume(res *http.ResponseWriter, req *http.Request, langCode string){
+	data := BuildResume(langCode)
 
 	tmpl := template.Must(template.ParseGlob(TemplateDir + "resume/" + "*.html"))
 
-	err := tmpl.ExecuteTemplate(res, "resume", data)
+	err := tmpl.ExecuteTemplate(*res, "resume", data)
 
 	CheckErrorNonFatal(err)
 }
+
+
+//Site will be served in english by default
+func ServeResumeDefault(res http.ResponseWriter, req *http.Request){
+	ServeResume(&res, req, "en")
+}
+
+
+//Adding a special rule to just redirect to default if /en/ is visited (for some reason)
+func ServeResumeEN(res http.ResponseWriter, req *http.Request){
+	http.Redirect(res, req, "/", http.StatusSeeOther)
+}
+
+
+// of course /fr/ will result in sreving the french version of the site
+func ServeResumeFR(res http.ResponseWriter, req *http.Request){
+	ServeResume(&res, req, "fr")
+}
+
 
 //Stops the current process if there is an error
 func CheckErrorFatal(e error){
@@ -61,8 +69,12 @@ func main() {
 	fmt.Println("Starting up server...")
 
 	server := http.FileServer(http.Dir(StaticDir))
+	//keeping the static version up for now, felt cute might delete later
 	http.Handle("/static/", http.StripPrefix("/static/", server))
-	http.HandleFunc("/", ServeResume)
+
+	http.HandleFunc("/", ServeResumeDefault)
+	http.HandleFunc("/en/", ServeResumeEN)
+	http.HandleFunc("/fr/", ServeResumeFR)
 
 	fmt.Println("Listening on", Port)
 	err := http.ListenAndServe(":" + Port, nil)

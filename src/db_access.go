@@ -87,10 +87,9 @@ func (db *Database) GetExperience(lang string) *[] Experience{
 
 	var exp Experience
 	var collect []Experience
-	var locale string		//for now, locale is a part of the view. this will probably change it its bugging for french anyway...
 
 	for rows.Next() {
-		rows.Scan(&locale, &exp.Title, &exp.Description, &exp.Company, &exp.Start, &exp.Stop)
+		rows.Scan(&exp.Title, &exp.Description, &exp.Company, &exp.Start, &exp.Stop)
 		collect = append(collect, exp)
 	}
 

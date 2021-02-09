@@ -12,6 +12,7 @@ type ResumeData struct{
 	Info *About
 	NavbarItems *Headers			//for the moment, the navbar is comprised of the page's headers. Might change later.
 	LangButton string
+	CurrLang string
 }
 
 /*Each section will have entries and a header*/

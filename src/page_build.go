@@ -52,6 +52,7 @@ func BuildResume(lang string) *ResumeData{
 		Info: about,
 		NavbarItems: headers,
 		LangButton: langBtn,
+		CurrLang: lang,
 	}
 
 	return &data

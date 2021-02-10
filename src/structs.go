@@ -1,7 +1,5 @@
 package main
 
-/*Most of these will have to be renamed to better reflect interactivity with the database*/
-
 //Struct that wraps all others, contains lists/arrays of every type, to use with html templates
 type ResumeData struct{
 	Edus *EduSection
@@ -73,7 +71,7 @@ type Experience struct {
 	Stop string
 }
 
-/*wow so much difference here!*/
+/*wow so much difference here! Still, keeping these in case I decide to add other properties some day. who knows!*/
 type Knowledge struct {
 	Name string
 }

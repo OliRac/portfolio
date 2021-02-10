@@ -9,9 +9,12 @@ import (
 const (
     host     = "localhost"
     port     = 5432
-    user     = "portfolio_viewer"
-    password = "ChargerPledgeBamboo0192"
-    dbname   = "portfolio_dev"
+
+	//this wasnt the real database info anyway ;)
+	//Fill up before attempting to execute!
+    user     = ""
+    password = ""		
+    dbname   = ""
 )
 
 type Database struct {

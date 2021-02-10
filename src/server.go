@@ -14,8 +14,6 @@ import (
 var (
 	StaticDir = filepath.FromSlash("../static/")
 	TemplateDir = filepath.FromSlash("../templates/")
-	CertPath = filepath.FromSlash("C:/certs/server.crt")	//cert and key are self signed for the moment
-	KeyPath = filepath.FromSlash("C:/certs/server.key")
 	Port = "8080"
 )
 
@@ -71,6 +69,7 @@ func main() {
 	fmt.Println("Starting up server...")
 
 	server := http.FileServer(http.Dir(StaticDir))
+
 	//keeping the static version up for now, felt cute might delete later
 	http.Handle("/static/", http.StripPrefix("/static/", server))
 
@@ -79,7 +78,11 @@ func main() {
 	http.HandleFunc("/fr/", ServeResumeFR)
 
 	fmt.Println("Listening on", Port)
-	err := http.ListenAndServeTLS(":" + Port, CertPath, KeyPath, nil)
+
+	//nginx is used as a reverse proxy to deal with https
+	//Otherwise, this would have to be LisenAndServeTLS
+	//Certs and key from Let's Encrypt
+	err := http.ListenAndServe(":" + Port, nil)
 
 	CheckErrorFatal(err)
 }

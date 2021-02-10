@@ -12,6 +12,7 @@ import (
 //Files & directories to serve, port to use
 //Assuming globals use PascalCase in Go to differentiate from locals
 var (
+	//NOTE: These paths had to be modified when ran using systemctl.
 	StaticDir = filepath.FromSlash("../static/")
 	TemplateDir = filepath.FromSlash("../templates/")
 	Port = "8080"

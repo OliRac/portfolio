@@ -2,13 +2,11 @@
 My portfolio / website. 
 Backend made with Go, making use of its template module to build the page.
 
-Data is being imported with JSON unmarshall for the moment, will most probably switch to a database system (MariaDB, PostgreSQL, SQLite...) instead.
-
-Currently only available in english...
+This simple web server is installed on an ubuntu droplet on digital ocean. Available at https://oracette.ca
 
 ## TO DO
 - [x] Database
-- [ ] French version
+- [x] French version
 - [x] Switching languages
-- [ ] HTTPS
-- [ ] Hosting the site somewhere :)
+- [x] HTTPS
+- [x] Hosting the site somewhere :)
